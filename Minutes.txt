@@ -3,7 +3,16 @@ Group 1 members: Erik Anderberg, Ivo Urbanczyk, Lincoln Tut, Jackson Bamber, Jon
 
 Minutes: 
 -----------------------------
-Session 1 (1/5-22, Discord)
+Session 1 (29/3-22, Tron Lab)
 Present: All
 
-Decided on project idea and assigned partial tasks
+Spent the lab discussing and brainstorming prototype ideas.
+-----------------------------
+Session 2 (1/5-22, Discord)
+Present: All
+
+Decided on project idea and assigned partial tasks;
+  User interface - Erik
+  LIDAR sensor info to distance - Ivo
+  Controlling/Checking LIDAR orientation using IMU - Lincoln
+  Logic for LIDAR movement - Jonathan and Jackson
