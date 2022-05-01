@@ -1,6 +1,7 @@
 # MTRX2700-Major-Project
 
 Modules:
+
 User interface - Erik
 Input: Stock status (an integer, which in binary has one bit for each spot on the shelf)
 Output: Fancy plots, possibly commands from the user?
