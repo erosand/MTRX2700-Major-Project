@@ -3,7 +3,7 @@
 Modules:
 
 User interface - Erik
-Input: Distance, elevation and azimuth for a point in the point cloud.
+Input: A struct containing distance, elevation and azimuth for a point in the point cloud.
 Output: Fancy plots
 
 LIDAR sensor info to distance - Ivo
