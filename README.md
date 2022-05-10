@@ -3,8 +3,8 @@
 Modules:
 
 User interface - Erik
-Input: Stock status (an integer, which in binary has one bit for each spot on the shelf)
-Output: Fancy plots, possibly commands from the user?
+Input: A struct containing distance, elevation and azimuth for a point in the point cloud.
+Output: Fancy plots
 
 LIDAR sensor info to distance - Ivo
 Output: Distance data (meters) at an address (type float)
