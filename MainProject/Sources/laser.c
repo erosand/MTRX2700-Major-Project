@@ -38,8 +38,9 @@ __interrupt void TC1_ISR(void) {
       TFLG2 = 128;  //clearing TOF
     }
     else {       //timer did not overflow
-      LastLaserSample = fallEdge - riseEdge;
+      lastLaserSample = fallEdge - riseEdge;
   }
   
   TFLG1 |= TFLG1_C1F_MASK; // Reset flag
+  }
 }

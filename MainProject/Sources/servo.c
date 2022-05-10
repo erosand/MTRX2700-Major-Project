@@ -36,7 +36,7 @@ void setServoPose(int azimuth, int elevation){
 void Init_TC6 (void) {
   TSCR1_TEN = 1;
   
-  TSCR2 = 0x00;   // prescaler 1, before 32 = 0x04
+  TSCR2 = 0x04;   // prescaler of 16
   TIOS_IOS6 = 1;   // set channel 6 to output compare
     
   TCTL1_OL6 = 1;    // Output mode for ch6
