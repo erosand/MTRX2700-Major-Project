@@ -13,7 +13,7 @@ def read_packet(f):
     if len(header_bytes) < MSG_HEADER_SIZE:
         # must be out of messages
         return False
-
+ 
     header_data = struct.unpack(">H8sHHH", header_bytes)
     print("header sentinels: " + str(hex(header_data[0])) + ", " + str(hex(header_data[4])))
 
@@ -49,7 +49,7 @@ def read_file(file_name):
     
 
 def read_serial(com_port):
-    serialPort = serial.Serial(port=com_port, baudrate=115200, bytesize=8, timeout=2, stopbits=serial.STOPBITS_ONE)
+    serialPort = serialCom.Serial(port=com_port, baudrate=115200, bytesize=8, timeout=2, stopbits=serialCom.STOPBITS_ONE)
     serialString = ""  # Used to hold data coming over UART
 
     while True:
