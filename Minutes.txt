@@ -7,6 +7,7 @@ Session 1 (29/3-22, Tron Lab)
 Present: All
 
 Spent the lab discussing and brainstorming prototype ideas.
+
 -----------------------------
 Session 2 (1/5-22, Discord)
 Present: All
@@ -16,3 +17,16 @@ Decided on project idea and assigned partial tasks;
   LIDAR sensor info to distance - Ivo
   Controlling/Checking LIDAR orientation using IMU - Lincoln
   Logic for LIDAR movement - Jonathan and Jackson
+
+-----------------------------
+Session 3 (, Tron Lab)
+Present: ????
+
+  ???????
+  
+-----------------------------
+Session 4 (15/5-22, Discord)
+Present: Erik, Jonathan, Jackson
+
+Completed a progress check and what else needs to be done
+Completed the progress report for week 12 submission
