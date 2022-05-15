@@ -100,7 +100,7 @@ void main(void) {
     SerialOutputString(buffer, &SCI1);
   }
 
-  laserInit();
+  laserInit();     
   
   #else
   
@@ -156,7 +156,7 @@ void main(void) {
     SerialOutputString(buffer, &SCI1);
     
     
-    _FEED_COP(); /* feeds the dog */
+    //_FEED_COP(); /* feeds the dog */
   } /* loop forever */
   
   /* please make sure that you never leave main */

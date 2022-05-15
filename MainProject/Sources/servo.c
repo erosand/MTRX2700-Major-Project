@@ -56,7 +56,7 @@ int toggle = 0;
 #pragma CODE_SEG __NEAR_SEG NON_BANKED /* Interrupt section for this module. Placement will be in NON_BANKED area. */
 __interrupt void TC6_ISR(void) { 
    
-  TC6 = TCNT + 64000;   // interrupt delay depends on the prescaler
+  TC6 = TCNT + 4000;   // interrupt delay depends on the prescaler
   TFLG1 |= TFLG1_C6F_MASK;
 
   if (toggle == 0)
@@ -70,6 +70,7 @@ __interrupt void TC6_ISR(void) {
     toggle = 0;
   }
   
-  setServoPose(50 + iterator_counter, 50 + iterator_counter);    
+  setServoPose(50 + iterator_counter, 50 + iterator_counter);
+  
 }
 

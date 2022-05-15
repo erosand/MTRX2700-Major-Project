@@ -19,8 +19,11 @@ void laserInit(void) {
   TIE_C1I = 1;     // enable interrupts for channel 1
 }
 
+
+//outputs range detected by LIDAR in number of milimeters.
 void GetLatestLaserSample(unsigned long *sample) {
-  *sample = lastLaserSample;
+  //*sample = (unisgned long int)1000000 * lastLaserSample * (16/24000000);// 16 is prescaler, 24million is CPU clock freq.
+  *sample = (unsigned long int)lastLaserSample * (16/24);   //simplified
 }
 
 
