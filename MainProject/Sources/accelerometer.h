@@ -18,6 +18,6 @@ typedef struct AccelScaled {
 
 // function to convert between raw and scaled acceleration
 //  note: this function requires verification and calibration
-void convertUnits(AccelRaw *raw_data, AccelScaled *scaled_data);
+void convertAccelUnits(AccelRaw *raw_data, AccelScaled *scaled_data);
 
 #endif

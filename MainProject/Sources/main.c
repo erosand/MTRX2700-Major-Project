@@ -67,11 +67,9 @@ void main(void) {
   
   char buffer[128];  
   
-  unsigned long singleSample;
+  unsigned long laserSample;
   
   //assert(error_code != NO_ERROR);
-
-  #ifndef SIMULATION_TESTING
 
   // make sure the board is set to 24MHz
   //  this is needed only when not using the debugger
@@ -80,11 +78,9 @@ void main(void) {
   // initialise PWM
   PWMinitialise();
   setServoPose(100, 100);
-
-  #endif
   
-  // initialise the simple serial
-  SerialInitialise(BAUD_9600, &SCI1);
+  // initialise SCI1
+  //SerialInitialise(BAUD_9600, &SCI1);
   
   #ifndef SIMULATION_TESTING
   
@@ -135,7 +131,7 @@ void main(void) {
     
     //error_code = getRawDataMagnet(&read_magnet);
     
-    GetLatestLaserSample(&singleSample);
+    GetLatestLaserSample(&laserSample);
         
     #else
     
@@ -147,10 +143,10 @@ void main(void) {
     #endif
 
     // convert the acceleration to a scaled value
-    convertUnits(&read_accel, &scaled_accel);    
+    convertAccelUnits(&read_accel, &scaled_accel);    
     
     // format the string of the sensor data to go the the serial    
-    sprintf(buffer, "%lu, %d, %d, %d, %.2f, %.2f, %.2f\r\n", singleSample, read_gyro.x, read_gyro.y, read_gyro.z, scaled_accel.x, scaled_accel.y, scaled_accel.z);
+    sprintf(buffer, "%lu, %d, %d, %d, %.2f, %.2f, %.2f\r\n", laserSample, read_gyro.x, read_gyro.y, read_gyro.z, scaled_accel.x, scaled_accel.y, scaled_accel.z);
     
     // output the data to serial
     SerialOutputString(buffer, &SCI1);
