@@ -46,20 +46,27 @@ void Init_TC6 (void) {
 }
 
 
-// variables to make the servo move back and forth
+// global variables to make the servos move in a specific pattern
 // note: This is just to demonstrate the function of the servo
 long iterator_counter = 0;
+long iter_azimuth = 0;
+long iter_elevation = 0;
 int toggle = 0;
+int toggle_elev = 0;
+int theta_azimuth = 45;
+int theta_elevation = 45;
+int theta_step = 30;
+
 
 
 // the interrupt for timer 6 which is used for cycling the servo
 #pragma CODE_SEG __NEAR_SEG NON_BANKED /* Interrupt section for this module. Placement will be in NON_BANKED area. */
 __interrupt void TC6_ISR(void) { 
    
-  TC6 = TCNT + 4000;   // interrupt delay depends on the prescaler
+  TC6 = TCNT + 1000;   // interrupt delay depends on the prescaler
   TFLG1 |= TFLG1_C6F_MASK;
 
-  if (toggle == 0)
+  /*if (toggle == 0)
     iterator_counter++;
   else
     iterator_counter--;
@@ -70,7 +77,32 @@ __interrupt void TC6_ISR(void) {
     toggle = 0;
   }
   
-  setServoPose(50 + iterator_counter, 50 + iterator_counter);
+  setServoPose(50 + iterator_counter, 50 + iterator_counter);    */
+  
+    if(toggle == 0){
+    iter_azimuth++;
+  }else{
+     iter_azimuth--;
+  }
+  if (iter_azimuth > theta_azimuth*theta_step| iter_azimuth < -1*theta_azimuth*theta_step) {
+    toggle = ~toggle;
+  
+    if (toggle_elev == 0) 
+      iter_elevation +=  5*theta_step;
+    else 
+      iter_elevation -= 5*theta_step;
+    
+    
+    if (iter_elevation > theta_elevation*theta_step|iter_elevation < -1*theta_elevation*theta_step){
+      
+      toggle_elev = ~toggle_elev;
+    }
+  }
+    
+  setServoPose(2700 + iter_azimuth, iter_elevation); 
+  //current_elevation = iter_elevation/theta_step;   
+ // current_azimuth = iter_azimuth/theta_step;
+
   
 }
 
