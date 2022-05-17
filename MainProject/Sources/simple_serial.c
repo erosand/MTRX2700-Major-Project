@@ -10,7 +10,7 @@ SerialPort SCI0 = {&SCI0BDH, &SCI0BDL, &SCI0CR1, &SCI0CR2, &SCI0DRL, &SCI0SR1};
 
 
 
-// InitialiseSerial - Initialise the serial port SCI1
+// InitialiseSerial - Initialise the given serial port
 // Input: baudRate is tha baud rate in bits/sec
 void SerialInitialise(int baudRate, SerialPort *serial_port) {
   

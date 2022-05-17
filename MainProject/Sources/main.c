@@ -71,8 +71,6 @@ void main(void) {
   
   //assert(error_code != NO_ERROR);
 
-  #ifndef SIMULATION_TESTING
-
   // make sure the board is set to 24MHz
   //  this is needed only when not using the debugger
   PLL_Init();
@@ -80,11 +78,9 @@ void main(void) {
   // initialise PWM
   PWMinitialise();
   setServoPose(100, 100);
-
-  #endif
   
-  // initialise the simple serial
-  SerialInitialise(BAUD_9600, &SCI1);
+  // initialise SCI1
+  //SerialInitialise(BAUD_9600, &SCI1);
   
   #ifndef SIMULATION_TESTING
   
