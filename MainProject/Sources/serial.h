@@ -19,7 +19,7 @@ struct MSG_HEADER {
    unsigned int msg_size;
    unsigned int header_time;
    int end_sentinel;
-}
+};
 
 struct DATA {
     int first_sentinal;
@@ -27,6 +27,6 @@ struct DATA {
     int angle_elevation;
     unsigned int range;
     int final_sentinal;
-}
+};
 
 #endif
