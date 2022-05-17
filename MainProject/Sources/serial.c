@@ -3,7 +3,7 @@
 
 
 
-void initSerial(void){
+void initSerial_SCI1(void){
     //Setting Baud rate to 9600 (default)
     SCI1BDL = 0x9C;
     SCI1BDH = 0;        
@@ -19,8 +19,8 @@ void sendData(char data) {
 }
 
 
-
-void serialisingData(char *data, int length) {
+//int length is the number of bytes(chars) to send
+void outputSerial_SCI1(char *data, int length) {
     int i = 0;
     for (i = 0; i < length; i++) {
         sendData(*data);
