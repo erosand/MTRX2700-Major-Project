@@ -52,10 +52,10 @@ if __name__ == '__main__':
        z = [p[2]/1000*np.sin(np.radians(p[1])) + sensor_pos[2] for p in points]
        
        # Plot spiral
-       xyz = spiral(n, 0.8*min(cl_height,cl_width)/2)
-       for i,vec in enumerate(xyz):
-              xyz[i] = [p + sensor_pos[i] for p in vec] 
-       [x,y,z] = xyz
+       # xyz = spiral(n, 0.8*min(cl_height,cl_width)/2)
+       # for i,vec in enumerate(xyz):
+       #        xyz[i] = [p + sensor_pos[i] for p in vec] 
+       # [x,y,z] = xyz
 
 
        fig = plt.figure()
