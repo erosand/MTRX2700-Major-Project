@@ -67,7 +67,7 @@ void main(void) {
   
   char buffer[128];  
   
-  unsigned long singleSample;
+  unsigned long laserSample;
   
   //assert(error_code != NO_ERROR);
 
@@ -135,7 +135,7 @@ void main(void) {
     
     //error_code = getRawDataMagnet(&read_magnet);
     
-    GetLatestLaserSample(&singleSample);
+    GetLatestLaserSample(&laserSample);
         
     #else
     
@@ -147,10 +147,10 @@ void main(void) {
     #endif
 
     // convert the acceleration to a scaled value
-    convertUnits(&read_accel, &scaled_accel);    
+    convertAccelUnits(&read_accel, &scaled_accel);    
     
     // format the string of the sensor data to go the the serial    
-    sprintf(buffer, "%lu, %d, %d, %d, %.2f, %.2f, %.2f\r\n", singleSample, read_gyro.x, read_gyro.y, read_gyro.z, scaled_accel.x, scaled_accel.y, scaled_accel.z);
+    sprintf(buffer, "%lu, %d, %d, %d, %.2f, %.2f, %.2f\r\n", laserSample, read_gyro.x, read_gyro.y, read_gyro.z, scaled_accel.x, scaled_accel.y, scaled_accel.z);
     
     // output the data to serial
     SerialOutputString(buffer, &SCI1);

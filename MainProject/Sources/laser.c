@@ -5,7 +5,7 @@
 // variables for reading the laser pulse timing
 unsigned long riseEdge = 0;
 unsigned long fallEdge = 0;
-unsigned long lastLaserSample = 0;
+unsigned long rawLaserSample = 0;
 
 void laserInit(void) {
                                              
@@ -23,7 +23,7 @@ void laserInit(void) {
 //outputs range detected by LIDAR in number of milimeters.
 void GetLatestLaserSample(unsigned long *sample) {
   //*sample = (unisgned long int)1000000 * lastLaserSample * (16/24000000);// 16 is prescaler, 24million is CPU clock freq.
-  *sample = (unsigned long int)lastLaserSample * (16/24);   //simplified
+  *sample = (unsigned long int)rawLaserSample * (16/24);   //simplified
 }
 
 
@@ -37,11 +37,11 @@ __interrupt void TC1_ISR(void) {
   else {  //captured a falling edge
     fallEdge = (unsigned long)TC1;
     if (TFLG2) { //if timer overflowed
-      lastLaserSample =  65536 - riseEdge + fallEdge;
+      rawLaserSample =  65536 - riseEdge + fallEdge;
       TFLG2 = 128;  //clearing TOF
     }
     else {       //timer did not overflow
-      lastLaserSample = fallEdge - riseEdge;
+      rawLaserSample = fallEdge - riseEdge;
   }
   
   TFLG1 |= TFLG1_C1F_MASK; // Reset flag
