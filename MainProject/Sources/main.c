@@ -21,55 +21,55 @@ void printErrorCode(IIC_ERRORS error_code) {
   char error_buffer[128]; //this is a buffer to store the ASCII string chars   
   switch (error_code) {
     case NO_ERROR:
-      error_header.msg_type = "text";
+      strcpy(error_header.msg_type, "text");
       error_header.msg_size = 16;
       sprintf(error_buffer, "IIC: No error\r\n");
       break;
     
     case NO_RESPONSE:
-      error_header.msg_type = "text";
+      strcpy(error_header.msg_type, "text");
       error_header.msg_size = 19; 
       sprintf(error_buffer, "IIC: No response\r\n");
       break;
     
     case NAK_RESPONSE:
-      error_header.msg_type = "text";
+      strcpy(error_header.msg_type, "text");
       error_header.msg_size = 22;
       sprintf(error_buffer, "IIC: No acknowledge\r\n");
       break;
     
     case IIB_CLEAR_TIMEOUT:
-      error_header.msg_type = "text";
+      strcpy(error_header.msg_type, "text");
       error_header.msg_size = 33;
       sprintf(error_buffer, "IIC: Timeout waiting for reply\r\n");
       break;
     
     case IIB_SET_TIMEOUT: 
-      error_header.msg_type = "text";
+      strcpy(error_header.msg_type, "text");
       error_header.msg_size = 23;
       sprintf(error_buffer, "IIC: Timeout not set\r\n");
       break;
     
     case RECEIVE_TIMEOUT:
-      error_header.msg_type = "text";
+      strcpy(error_header.msg_type, "text");
       error_header.msg_size = 24;
       sprintf(error_buffer, "IIC: Received timeout\r\n");
       break;
     
     case IIC_DATA_SIZE_TOO_SMALL:
-      error_header.msg_type = "text";
+      strcpy(error_header.msg_type, "text");
       error_header.msg_size = 27;
       sprintf(error_buffer, "IIC: Data size incorrect\r\n");
       break;
 
     default:
-      error_header.msg_type = "text";
+      strcpy(error_header.msg_type, "text");
       error_header.msg_size = 21;
       sprintf(error_buffer, "IIC: Unknown error\r\n");
       break;
   }
-  outputSerial_SCI1(error_header, sizeof(error_header)); 
-  outputSerial_SCI1(error_buffer, error_header.msg_size);
+  outputSerial_SCI1((char*)&error_header, sizeof(error_header)); 
+  outputSerial_SCI1((char*)&error_buffer, error_header.msg_size);
 }
 
 void main(void) {
@@ -81,18 +81,19 @@ void main(void) {
   AccelScaled scaled_accel;
   GyroRaw read_gyro;
   unsigned long laserSample;
+  struct MSG_HEADER header;
+  struct DATA sensor_values;//a place to collect all the sensor data into
   
   //error code variable
   IIC_ERRORS error_code = NO_ERROR;
   
   //serialisation variables
-  struct MSG_HEADER header;
+  int msg_length = 0; //essentially a counter to know how many bytes we need to send
   header.sentinel = 0xABCD;
   header.end_sentinel = 0xDCBA;
-  struct DATA sensor_values;  //a place to collect all the sensor data into
-  sensor_values.first_sentinel = 0xAAAA;
-  sensor_values.final_sentinel = 0xBBBB;
-  int msg_length = 0; //essentially a counter to know how many bytes we need to send
+  sensor_values.first_sentinal = 0xAAAA;
+  sensor_values.final_sentinal = 0xBBBB;
+  
   
   //assert(error_code != NO_ERROR);
 
@@ -102,7 +103,7 @@ void main(void) {
   PLL_Init(); // makes sure the board is set to 24MHz. this is needed only when not using the debugger
   PWMinitialise();
   setServoPose(100, 100);
-  initSerial_SCI1(void)
+  initSerial_SCI1();
   
   error_code = iicSensorInit();   // initialise the sensor suite
   // write the result of the sensor initialisation to the serial
@@ -148,16 +149,17 @@ void main(void) {
     // collecting all the sensor values is now done
     // Now we need to fill in the struct DATA sensor_values with the appropriate numbers to be sent over serial
     sensor_values.angle_azimuth = 0;  //just temporary 
-    sensor_values.angle_elevation = scaled_accel; //this needs to be converted to an angle. Only temporary 
+    sensor_values.angle_elevation = scaled_accel.z; //this needs to be converted to an angle. Only temporary 
     sensor_values.range = laserSample;
     
     // first send the header
-    outputSerial_SCI1(header, sizeof(struct MSG_HEADER));
+    outputSerial_SCI1((char*)&header, sizeof(struct MSG_HEADER));
     //then send the data that follows the header
-    outputSerial_SCI1(sensor_values, sizeof(struct DATA));
+    outputSerial_SCI1((char*)&sensor_values, sizeof(struct DATA));
     
     //_FEED_COP(); /* feeds the dog */
   } /* loop forever */
   
   /* please make sure that you never leave main */
 }
+
