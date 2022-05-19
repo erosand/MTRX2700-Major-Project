@@ -88,8 +88,10 @@ void main(void) {
   IIC_ERRORS error_code = NO_ERROR;
   
   //serialisation variables
-  int msg_length = 0; //essentially a counter to know how many bytes we need to send
+  
   header.sentinel = 0xABCD;
+  strcpy(&header.msg_type,"point");
+  header.msg_size = sizeof(struct DATA); 
   header.end_sentinel = 0xDCBA;
   sensor_values.first_sentinal = 0xAAAA;
   sensor_values.final_sentinal = 0xBBBB;
@@ -125,7 +127,8 @@ void main(void) {
     if (error_code != NO_ERROR) {
       printErrorCode(error_code);    
       error_code = iicSensorInit();
-      printErrorCode(error_code);   
+      printErrorCode(error_code);  
+      continue; 
     }
     
     //read the accelerometer raw value
@@ -134,6 +137,7 @@ void main(void) {
       printErrorCode(error_code);   
       error_code = iicSensorInit();
       printErrorCode(error_code); 
+      continue; 
     }
     
     //read the scaled(in mm) LIDAR range value    

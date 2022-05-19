@@ -20,24 +20,27 @@ def readSerial(serialPort):
                 return False
         except Exception as e:
             print(traceback.format_exc())
-            # Logs the error appropriately.               
+            # Logs the error appropriately.     
+                  
 def readPacket(serialPort):
     header_bytes = serialPort.read(MSG_HEADER_SIZE)
 
     if len(header_bytes) < MSG_HEADER_SIZE:
         # must be out of messages
+        print("Here 1")
         return False
  
     header_data = struct.unpack(">H8sHHH", header_bytes)
-    #print("Header sentinels: " + str(hex(header_data[0])) + ", " + str(hex(header_data[4])))
+    print("Header sentinels: " + str(hex(header_data[0])) + ", " + str(hex(header_data[4])))
 
     message_type = header_data[1].split(b'\0', 1)[0]  # remove the null characters from the string
-    #print("Message type: " + message_type.decode("utf-8"))
-    #print("Message size: " + str(header_data[2]))
+    print(message_type)
+    print("Message type: " + message_type.decode("utf-8"))
+    print("Message size: " + str(header_data[2]))
 
     if message_type == b"text":
         text_bytes = serialPort.read(header_data[2])
-        print("Text message: " + str(text_bytes))
+        print("Text message: " + str(text_bytes.decode("utf-8")))
     elif message_type == b"gyro":
         gyro_bytes = serialPort.read(header_data[2])
         gyro_data = struct.unpack(">hhhhH", gyro_bytes)
@@ -47,6 +50,7 @@ def readPacket(serialPort):
         point_data = struct.unpack(">iiiIi", point_bytes)
         print("Point message: " + str(point_data[1:4]))
         return point_data[1:4]
+    else: print("Here 2", message_type,"\n\n")
     return False
 
 def sendPoint(sp,point):
@@ -85,7 +89,7 @@ def figSetup(fig,params):
 
 if __name__ == '__main__':
     sp1 = serial.Serial(port="COM1", baudrate=9600, bytesize=8, timeout=2, stopbits=serial.STOPBITS_ONE) # For sending (testing)
-    sp2 = serial.Serial(port="COM2", baudrate=9600, bytesize=8, timeout=2, stopbits=serial.STOPBITS_ONE) # For receiving
+    sp2 = serial.Serial(port="COM10", baudrate=9600, bytesize=8, timeout=2, stopbits=serial.STOPBITS_ONE) # For receiving
     
     sensor_pos = [0, 0, 0]
     cl_width = 10
@@ -97,9 +101,9 @@ if __name__ == '__main__':
     r_data = randomPoints(200, 45, 45, [2000,10000]) # Generate simulated points from the Lidar   
     data_vec = []
     points = []
-
-    for i in range(0,20):
-        sendPoint(sp1,r_data[i]) # Simulates data being sent from Lidar
+    plt.pause(1) # Needed for contiuous updates of the plot ("animation")
+    while True:
+       # sendPoint(sp1,r_data[i]) # Simulates data being sent from Lidar
         
         data = readSerial(sp2) 
         if data:
@@ -114,5 +118,5 @@ if __name__ == '__main__':
             ax.scatter(x,y,z,s=4,depthshade=False,label='Points',color=col)
             ax.legend(['Lidar','Points'])
             
-            plt.pause(0.001) # Needed for contiuous updates of the plot ("animation")
+            plt.pause(0.1) # Needed for contiuous updates of the plot ("animation")
     plt.show(block=True) # Prevents the figure from closing when the program is finished
