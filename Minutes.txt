@@ -30,3 +30,9 @@ Present: Erik, Jonathan, Jackson
 
 Completed a progress check and what else needs to be done
 Completed the progress report for week 12 submission
+
+
+Session 5 (19/5-22, Engineering building)
+Present: Erik, Ivo
+
+Testing and debugging transmission of data from board to python.
