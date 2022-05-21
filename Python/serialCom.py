@@ -13,8 +13,11 @@ def readSerial(serialPort):
     if serialPort.in_waiting > 0:
         try:
             data = readPacket(serialPort)
-            if data:
-                return list(data)
+
+            if isinstance(data,list):
+                return data
+            elif data: # If the packet was a text message nothing needs to be returned
+                return False
             else:
                 print("Error, data = ", data)
                 return False
@@ -27,13 +30,13 @@ def readPacket(serialPort):
 
     if len(header_bytes) < MSG_HEADER_SIZE:
         # must be out of messages
-        print("Here 1")
+        print("Error: Header is ", len(header_bytes), " bytes")
         return False
  
     header_data = struct.unpack(">H8sHHH", header_bytes)
     print("Header sentinels: " + str(hex(header_data[0])) + ", " + str(hex(header_data[4])))
 
-    message_type = header_data[1].split(b'\0', 1)[0]  # remove the null characters from the string
+    message_type = header_data[1].split(b'\0', 1)[0]  # Remove the null characters from the string
     print(message_type)
     print("Message type: " + message_type.decode("utf-8"))
     print("Message size: " + str(header_data[2]))
@@ -41,17 +44,20 @@ def readPacket(serialPort):
     if message_type == b"text":
         text_bytes = serialPort.read(header_data[2])
         print("Text message: " + str(text_bytes.decode("utf-8")))
+        return True
     elif message_type == b"gyro":
         gyro_bytes = serialPort.read(header_data[2])
         gyro_data = struct.unpack(">hhhhH", gyro_bytes)
-        print("Gyro message: " + str(gyro_data[1]) + ", " + str(gyro_data[2]) + ", " + str(gyro_data[3]) + ", time=" + str(gyro_data[4]))
+        print("Gyro message: " + str(gyro_data[1:4]) + ", time=" + str(gyro_data[4]))
+        return True
     elif message_type == b"point":
         point_bytes = serialPort.read(header_data[2])
         point_data = struct.unpack(">iiiIi", point_bytes)
         print("Point message: " + str(point_data[1:4]))
-        return point_data[1:4]
-    else: print("Here 2", message_type,"\n\n")
-    return False
+        return list(point_data[1:4])
+    else: 
+        print("Error: Invalid message type: ", message_type,"\n\n")
+        return False
 
 def sendPoint(sp,point):
     point = [int(p) for p in point]
@@ -101,10 +107,11 @@ if __name__ == '__main__':
     r_data = randomPoints(200, 45, 45, [2000,10000]) # Generate simulated points from the Lidar   
     data_vec = []
     points = []
+    p_count = 0
     plt.pause(1) # Needed for contiuous updates of the plot ("animation")
-    while True:
-       # sendPoint(sp1,r_data[i]) # Simulates data being sent from Lidar
-        
+
+    while p_count < 100:
+       # sendPoint(sp1,r_data[i]) # Simulates data being sent from Lidar     
         data = readSerial(sp2) 
         if data:
             data_vec.append(data)
@@ -119,4 +126,6 @@ if __name__ == '__main__':
             ax.legend(['Lidar','Points'])
             
             plt.pause(0.1) # Needed for contiuous updates of the plot ("animation")
+            p_count = p_count + 1
+
     plt.show(block=True) # Prevents the figure from closing when the program is finished
