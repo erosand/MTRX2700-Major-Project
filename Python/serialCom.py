@@ -34,23 +34,23 @@ def readPacket(serialPort):
         return False
  
     header_data = struct.unpack(">H8sHH", header_bytes)
-    print("\nHeader sentinels: " + str(hex(header_data[0])) + ", " + str(hex(header_data[3])))
+    #print("\nHeader sentinels: " + str(hex(header_data[0])) + ", " + str(hex(header_data[3])))
 
     message_type = header_data[1].split(b'\0', 1)[0]  # Remove the null characters from the string
-    print("Message type: " + str(message_type))
-    print("Message size: " + str(header_data[2]))
+    # print("Message type: " + str(message_type))
+    # print("Message size: " + str(header_data[2]))
 
     if message_type == b"text":
         text_bytes = serialPort.read(header_data[2])
-        print("Text message: " + str(text_bytes.decode("utf-8")))
+        #print("Text message: " + str(text_bytes.decode("utf-8")))
         return True
     elif message_type == b"point":
         point_bytes = serialPort.read(header_data[2])
         point_data = struct.unpack(">HhhIH", point_bytes)
-        print("Point message: " + str(point_data[1:4]))
+        #print("Point message: " + str(point_data[1:4]))
         return list(point_data[1:4])
     else: 
-        print("Error: Invalid message type: ", message_type,"\n\n")
+        #print("Error: Invalid message type: ", message_type,"\n\n")
         return False
 
 def sendPoint(sp,point):
@@ -101,13 +101,14 @@ if __name__ == '__main__':
     ax = figSetup(plt.figure(), [sensor_pos, win_x, win_y, win_z]) # Setup figure and plot sensor position
     ax.scatter(sensor_pos[0],sensor_pos[1],sensor_pos[2],c='r',marker='s',label='LIDAR')
 
-    r_data = randomPoints(200, 45, 45, [2000,10000]) # Generate simulated points from the Lidar   
+    n_points = 100
+    r_data = randomPoints(n_points, 45, 45, [2000,10000]) # Generate simulated points from the Lidar   
     data_vec = []
     points = []
     p_count = 0
     plt.pause(1) # Needed for contiuous updates of the plot ("animation")
 
-    while p_count < 100:
+    while p_count < n_points:
         sendPoint(sp1,r_data[p_count]) # Simulates data being sent from Lidar     
         data = readSerial(sp2) 
         if data:
@@ -118,10 +119,9 @@ if __name__ == '__main__':
 
             z_n = (sensor_pos[2] - z - 1.4)/(sensor_pos[2] - 1.4) # Normalise y (depth) to [0,1]
             col = [0.5*z_n, 1-z_n, z_n] # Calculate RGB color based on normalised y-value 
-            print(z,)
-            ax.scatter(x,y,z,s=4,depthshade=False,label='Points',color=col)
+            ax.scatter(x,y,z,s=2,depthshade=False,label='Points',color=col)
             ax.legend(['Lidar','Points'])
-            
+            ax.set_title('Point cloud, ' + str(p_count+1) + ' points')
             plt.pause(0.1) # Needed for contiuous updates of the plot ("animation")
             p_count = p_count + 1
 
