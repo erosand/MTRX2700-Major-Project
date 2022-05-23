@@ -83,7 +83,7 @@ void servoMove(int* elevation, int*azimuth){
     toggle = ~toggle;
   
     if (toggle_elev == 0) 
-      iter_elevation +=  1*theta_step;
+      iter_elevation += 1*theta_step;
     else 
       iter_elevation -= 1*theta_step;
     
