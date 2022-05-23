@@ -135,7 +135,7 @@ void main(void) {
     
     //error_code = getRawDataMagnet(&read_magnet);
     
-    GetLatestLaserSample(&singleSample);
+    singleSample = GetLatestLaserSample();
         
     #else
     
@@ -150,7 +150,7 @@ void main(void) {
     convertUnits(&read_accel, &scaled_accel);    
     
     // format the string of the sensor data to go the the serial    
-    sprintf(buffer, "Point,%d,%d,%lu", 120, 120, 5500);
+    sprintf(buffer, "Point,%d,%d,%lu\n", 120, 120, singleSample);
     
     // output the data to serial
     SerialOutputString(buffer, &SCI1);

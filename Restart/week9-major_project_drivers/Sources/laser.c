@@ -20,8 +20,8 @@ void laserInit(void){
   TFLG1 |= TFLG1_C1F_MASK; // Reset flag
 }
 
-void GetLatestLaserSample(unsigned long *sample) {
-  *sample = lastLaserSample;
+unsigned long GetLatestLaserSample(void) {
+  return lastLaserSample * 0.041667;
 }
 
 

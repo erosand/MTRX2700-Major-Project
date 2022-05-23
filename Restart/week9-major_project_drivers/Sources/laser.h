@@ -2,7 +2,7 @@
 #define __laser_h
 
 // get the latest laser measurement
-void GetLatestLaserSample(unsigned long *sample);
+unsigned long GetLatestLaserSample(void);
 
 
 // initialise the laser timer
