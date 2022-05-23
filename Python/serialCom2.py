@@ -83,9 +83,9 @@ def figSetup(fig,params):
     ax.set_ylabel('Y-axis')
     ax.set_zlabel('Z-axis')
     ax.set_title('Point cloud')
-    ax.set(xlim=(sensor_pos[0]-win_x/2, sensor_pos[0]+win_x/2), xticks=np.arange(sensor_pos[0]-win_x/2, sensor_pos[0]+win_x/2+1),
-            ylim=(sensor_pos[1]-win_y/2, sensor_pos[1]+win_y/2), yticks=np.arange(sensor_pos[1]-win_y/2, sensor_pos[1]+win_y/2+1),
-            zlim=(0, sensor_pos[2]), zticks=np.arange(0, sensor_pos[2]+1))
+    # ax.set(xlim=(sensor_pos[0]-win_x/2, sensor_pos[0]+win_x/2), xticks=np.arange(sensor_pos[0]-win_x/2, sensor_pos[0]+win_x/2+1),
+    #         ylim=(sensor_pos[1]-win_y/2, sensor_pos[1]+win_y/2), yticks=np.arange(sensor_pos[1]-win_y/2, sensor_pos[1]+win_y/2+1),
+    #         zlim=(0, sensor_pos[2]), zticks=np.arange(0, sensor_pos[2]+1))
     return ax
 
 if __name__ == '__main__':
@@ -96,16 +96,19 @@ if __name__ == '__main__':
     win_y = 10
     win_z = 10
     sensor_pos = [win_x/2, win_y/2, win_z]
-    ax = figSetup(plt.figure(), [sensor_pos, win_x, win_y, win_z]) # Setup figure and plot sensor position
-    ax.scatter(sensor_pos[0],sensor_pos[1],sensor_pos[2],c='r',marker='s',label='LIDAR')
+    # ax = figSetup(plt.figure(), [sensor_pos, win_x, win_y, win_z]) # Setup figure and plot sensor position
+    # ax.scatter(sensor_pos[0],sensor_pos[1],sensor_pos[2],c='r',marker='s',label='LIDAR')
 
-    n_points = 100
+    n_points = 20000
     #r_data = randomPoints(n_points, 45, 45, [2000,10000]) # Generate simulated points from the Lidar   
     data_vec = []
     data = 0
     points = []
+    X = []
+    Y = []
+    Z = []
     p_count = 0
-    plt.pause(1) # Needed for contiuous updates of the plot ("animation")
+    # plt.pause(1) # Needed for contiuous updates of the plot ("animation")
 
     testdata = b'Point,111,11,12345\nPoint,22,222,12345\n'
     
@@ -128,17 +131,27 @@ if __name__ == '__main__':
             data_vec.append(data)
             [x,y,z] = sphe2cart(data,sensor_pos) # Convert from spherical coordinates to cartesian
             points.append([x,y,z])
+            X.append(x)
+            Y.append(y)
+            Z.append(z)
             data = 0
 
-            z_n = (sensor_pos[2] - z - 1.4)/(sensor_pos[2] - 1.4) # Normalise y (depth) to [0,1]
-            col = [0.5*z_n, 1-z_n, z_n] # Calculate RGB color based on normalised y-value 
-            ax.scatter(x,y,z,s=2,depthshade=False,label='Points',color=col)
-            ax.legend(['Lidar','Points'])
-            ax.set_title('Point cloud, ' + str(p_count+1) + ' points')
-            plt.pause(0.1) # Needed for contiuous updates of the plot ("animation")
+            # z_n = (sensor_pos[2] - z - 1.4)/(sensor_pos[2] - 1.4) # Normalise y (depth) to [0,1]
+            # col = [0.5*z_n, 1-z_n, z_n] # Calculate RGB color based on normalised y-value 
+            # ax.scatter(x,y,z,s=2,depthshade=False,label='Points',color='b')
+            # ax.legend(['Lidar','Points'])
+            # ax.set_title('Point cloud, ' + str(p_count+1) + ' points')
+            # plt.pause(0.1) # Needed for contiuous updates of the plot ("animation")
 
             p_count = p_count + 1
-        print(p_count)
+            print(p_count)
 
-    plt.show(block=True) # Prevents the figure from closing when the program is finished
+    
+    if True:
+        ax = figSetup(plt.figure(), [sensor_pos, win_x, win_y, win_z]) # Setup figure and plot sensor position
+        ax.scatter(sensor_pos[0],sensor_pos[1],sensor_pos[2],c='r',marker='s',label='LIDAR')
+        ax.scatter(X,Y,Z,s=0.5,depthshade=False,label='Points',c=Z)
+        ax.legend(['Lidar','Points'])
+        ax.set_title('Point cloud, ' + str(p_count+1) + ' points')
+        plt.show(block=True) # Prevents the figure from closing when the program is finished
     

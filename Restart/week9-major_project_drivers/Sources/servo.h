@@ -12,6 +12,8 @@ void setServoPose(int azimuth, int elevation);
 __interrupt void TC6_ISR(void);
 
 void Init_TC6 (void);
-
+extern int current_azimuth;
+extern int current_elevation;
+void servoMove(int* elevation, int*azimuth);
 
 #endif
