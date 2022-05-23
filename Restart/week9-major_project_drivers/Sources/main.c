@@ -65,7 +65,7 @@ void main(void) {
   
   IIC_ERRORS error_code = NO_ERROR;
   
-  char buffer[128];  
+  char buffer[25];  
   
   unsigned long singleSample;
   
@@ -147,10 +147,10 @@ void main(void) {
     #endif
 
     // convert the acceleration to a scaled value
-    convertUnits(&read_accel, &scaled_accel);    
+    convertUnits(&read_accel, &scaled_accel); //converts to units of gs   
     
     // format the string of the sensor data to go the the serial    
-    sprintf(buffer, "Point,%d,%d,%lu\n", 120, 120, singleSample);
+    sprintf(buffer, "Point,%d,%d,%lu\r\n", current_azimuth, current_elevation, singleSample);
     
     // output the data to serial
     SerialOutputString(buffer, &SCI1);
@@ -158,6 +158,4 @@ void main(void) {
     
     //_FEED_COP(); /* feeds the dog */
   } /* loop forever */
-  
-  /* please make sure that you never leave main */
 }
