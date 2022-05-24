@@ -1,21 +1,43 @@
 # MTRX2700-Major-Project
 
+Project overview:
+
+Keeping track of stock status in a storage using a lidar mounted in the ceiling.
+
+
 Modules:
 
+
 User interface - Erik
-Input: A struct containing distance, elevation and azimuth for a point in the point cloud.
-Output: Fancy plots
+
+Input: Serial data containing distance, elevation and azimuth for a point in the point cloud.
+
+Output: 3D plot of the point cloud, list of all points.
+
 
 LIDAR sensor info to distance - Ivo
-Output: Distance data (meters) at an address (type float)
 
-Controlling LIDAR orientation - Lincoln
-Input: Desired orientation(two angles at memory address (float)), current orientation
+Output: Distance data (millimeters) at an address (type int)
 
-Checking LIDAR orientation using IMU - Lincoln
-Input: IMU data (from I2C)
-Output: Orientation (angle in degrees?)
+ 
+LIDAR movement - Lincoln 
 
-Logic for LIDAR movement - Jonathan and Jackson
-Input: Current orientation, status?
-Output: New desired LIDAR orientation
+Input: Current orientation (two angles at memory address, type int)
+
+Output: New desired LIDAR orientation, commands to actuators
+
+
+Post-processing of the point cloud - Jonathan
+
+Input: List of points in point cloud
+
+Output: Refined plot of storage status
+
+
+Serialisation - Jackson 
+
+Input: Sensor data in memory
+
+Output: Serial data sent to python
+
+
