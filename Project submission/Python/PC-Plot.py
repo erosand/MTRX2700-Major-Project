@@ -25,7 +25,6 @@ def figSetup():
     return ax
 
 if __name__ == '__main__':
-    print(type(serial.Serial()))
     # sp1 = serial.Serial(port="COM1", baudrate=9600, bytesize=8, timeout=2, stopbits=serial.STOPBITS_ONE) # For sending (testing)
     sp2 = serial.Serial(port="COM2", baudrate=9600, bytesize=8, timeout=2, stopbits=serial.STOPBITS_ONE) # For receiving
     
