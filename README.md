@@ -1,9 +1,10 @@
 # MTRX2700-Major-Project
 
-Project overview:
+Project idea:
 
 Keeping track of stock status in a storage using a lidar mounted in the ceiling.
 
+The lidar is mounted above the storage area, minimum and maximum range for the scanner are specified, and scanning is started. The measurments form a point cloud, which is refined to identify the top sides of each individual box. The scans are repeated with a desired time interval, and any changes in between scans can alert the user that it's time to restock. 
 
 Modules:
 
