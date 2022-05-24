@@ -22,7 +22,8 @@ Decided on project idea and assigned partial tasks;
 Session 3 (3/5, Tron Lab)
 Present: All
 Agenda: To brainstorm
-We had not received a PTU yet so progress was limited, idea was developed and further delegation of parts occurred. 
+We had not received a PTU yet so progress was limited, idea was developed and further delegation of parts occurred.
+
 -----------------------------
 Session 4 (15/5-22, Discord)
 Present: Erik, Jonathan, Jackson
