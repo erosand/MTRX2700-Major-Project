@@ -123,7 +123,7 @@ void main(void) {
   for(;;) {
   
     // read the gyro raw value
-    error_code = getRawDataGyro(&read_gyro);   
+ /*   error_code = getRawDataGyro(&read_gyro);   
     if (error_code != NO_ERROR) {
       printErrorCode(error_code);    
       error_code = iicSensorInit();
@@ -138,7 +138,7 @@ void main(void) {
       error_code = iicSensorInit();
       printErrorCode(error_code); 
       continue; 
-    }
+    }    */
     
     //read the scaled(in mm) LIDAR range value    
     GetLatestLaserSample(&laserSample);

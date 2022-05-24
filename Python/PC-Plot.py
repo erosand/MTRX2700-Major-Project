@@ -25,11 +25,12 @@ def figSetup():
     return ax
 
 if __name__ == '__main__':
+    print(type(serial.Serial()))
     # sp1 = serial.Serial(port="COM1", baudrate=9600, bytesize=8, timeout=2, stopbits=serial.STOPBITS_ONE) # For sending (testing)
-    sp2 = serial.Serial(port="COM10", baudrate=9600, bytesize=8, timeout=2, stopbits=serial.STOPBITS_ONE) # For receiving
+    sp2 = serial.Serial(port="COM2", baudrate=9600, bytesize=8, timeout=2, stopbits=serial.STOPBITS_ONE) # For receiving
     
     sensor_pos = [0, 0, 10] # Sensor position
-    n_points = 5000 # Number of points
+    n_points = 1000 # Number of points
     [d_min, d_max] = [0.4, 1] # Points outside of this range are regarded as outliers and get discarded
     [z_min, z_max] = [sensor_pos[2]-d_max, sensor_pos[2]-d_min]
     testdata = b'Point,111,11,12345\nPoint,22,222,6789\n'

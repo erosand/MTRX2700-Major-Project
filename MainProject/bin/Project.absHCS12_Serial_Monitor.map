@@ -1,5 +1,5 @@
 *** EVALUATION ***
-PROGRAM "C:\Users\erosa\Documents\MTRX2700\MTRX2700-Major-Project\MainProject\bin\Project.absHCS12_Serial_Monitor.abs"
+PROGRAM "C:\Users\johnn\Documents\MTRX2700-Major-Project\MainProject\bin\Project.absHCS12_Serial_Monitor.abs"
 
 *********************************************************************************************
 TARGET SECTION
@@ -55,7 +55,7 @@ Section Name                    Size  Type     From       To       Segment
 .rodata1                         231     R     0xC0F6     0xC1DC   ROM_C000
 NON_BANKED                      1670     R     0xC1DD     0xC862   ROM_C000
 .copy                             20     R     0xC863     0xC876   ROM_C000
-.text                           3998     R   0x308000   0x308F9D   PAGE_30
+.text                           3624     R   0x308000   0x308E27   PAGE_30
 .stack                          4096   R/W     0x1000     0x1FFF   RAM
 .data                             14   R/W     0x2000     0x200D   RAM
 .abs_section_8                     1   N/I        0x8        0x8   .absSeg0
@@ -404,7 +404,7 @@ NON_BANKED                      1670     R     0xC1DD     0xC862   ROM_C000
 .vectSeg342_vect                   2     R     0xFFFE     0xFFFF   .vectSeg342
 
 Summary of section sizes per section type:
-READ_ONLY (R):        1895 (dec:     6293)
+READ_ONLY (R):        171F (dec:     5919)
 READ_WRITE (R/W):     1033 (dec:     4147)
 NO_INIT (N/I):         190 (dec:      400)
 
@@ -515,9 +515,9 @@ MODULE:                 -- mc9s12dg256.c.o --
      _SPI0DR                                     DD       1       1       0   .abs_section_dd
      _IBAD                                       E0       1       1       1   .abs_section_e0
      _IBFD                                       E1       1       1       1   .abs_section_e1
-     _IBCR                                       E2       1       1       9   .abs_section_e2
-     _IBSR                                       E3       1       1      11   .abs_section_e3
-     _IBDR                                       E4       1       1       7   .abs_section_e4
+     _IBCR                                       E2       1       1       3   .abs_section_e2
+     _IBSR                                       E3       1       1       5   .abs_section_e3
+     _IBDR                                       E4       1       1       2   .abs_section_e4
      _SPI1CR1                                    F0       1       1       0   .abs_section_f0
      _SPI1CR2                                    F1       1       1       0   .abs_section_f1
      _SPI1BR                                     F2       1       1       0   .abs_section_f2
@@ -764,8 +764,8 @@ MODULE:                 -- mc9s12dg256.c.o --
      _CAN4TXTSR                                 2BE       2       2       0   .abs_section_2be
 MODULE:                 -- main.c.o --
 - PROCEDURES:
-     printErrorCode                          308000      D7     215       4   .text       
-     main                                    3080D7      C8     200       2   .text       
+     printErrorCode                          308000      D7     215       2   .text       
+     main                                    3080D7      9E     158       2   .text       
 - VARIABLES:
      STRING.text.1                             C0F6       5       5       1   .rodata1    
      STRING.IIC..No.error...2                  C0FB      10      16       1   .rodata1    
@@ -786,7 +786,7 @@ MODULE:                 -- main.c.o --
      STRING.point.17                           C1D7       6       6       1   .rodata1    
 MODULE:                 -- Start12.c.o --
 - PROCEDURES:
-     Init                                    30819F      29      41       2   .text       
+     Init                                    308175      29      41       2   .text       
      _Startup                                  C000      18      24       0   .init       
 - VARIABLES:
      _startupData                              C018       6       6       3   .startData  
@@ -794,11 +794,11 @@ MODULE:                 -- Start12.c.o --
      __SEG_END_SSTACK                          2000       0       0       1               
 MODULE:                 -- PRINTF.C.o (ansib.lib) --
 - PROCEDURES:
-     Ten                                     3081C8      AC     172       5   .text       
-     vprintf                                 308274     933    2355     128   .text       
-     _out                                    308BA7       C      12       2   .text       
-     deposit_char                            308BB3       F      15       3   .text       
-     sprintf                                 308BC2      2F      47       2   .text       
+     Ten                                     30819E      AC     172       5   .text       
+     vprintf                                 30824A     933    2355     128   .text       
+     _out                                    308B7D       C      12       2   .text       
+     deposit_char                            308B89       F      15       3   .text       
+     sprintf                                 308B98      2F      47       2   .text       
 - VARIABLES:
      pow10                                     C022      28      40       6   .rodata     
      pow16                                     C04A      20      32       4   .rodata     
@@ -808,7 +808,7 @@ MODULE:                 -- PRINTF.C.o (ansib.lib) --
      pbuf                                      200E       7       7      16   .bss        
 MODULE:                 -- STRING.C.o (ansib.lib) --
 - PROCEDURES:
-     strcpy                                  308BF1       D      13      18   .text       
+     strcpy                                  308BC7       D      13      18   .text       
 - VARIABLES:
 MODULE:                 -- FADD.C.o (ansib.lib) --
 - PROCEDURES:
@@ -880,7 +880,7 @@ MODULE:                 -- VREGS.C.o (ansib.lib) --
 - VARIABLES:
 MODULE:                 -- pll.c.o --
 - PROCEDURES:
-     PLL_Init                                308BFE      15      21       2   .text       
+     PLL_Init                                308BD4      15      21       2   .text       
 - VARIABLES:
 MODULE:                 -- isr_vectors.c.o --
 - PROCEDURES:
@@ -890,48 +890,39 @@ MODULE:                 -- isr_vectors.c.o --
      _vect                                     FF80      7E     126       0   .abs_section_ff80
 MODULE:                 -- l3g4200d.c.o --
 - PROCEDURES:
-     getRawDataAccel                         308C13      21      33       2   .text       
-     getRawDataGyro                          308C34      21      33       2   .text       
-     iicSensorInit                           308C55      29      41       2   .text       
-     accel_init                              308C7E      10      16       2   .text       
-     gyro_init                               308C8E      10      16       2   .text       
-     magnet_init                             308C9E      10      16       2   .text       
+     iicSensorInit                           308BE9      29      41       2   .text       
+     accel_init                              308C12      10      16       2   .text       
+     gyro_init                               308C22      10      16       2   .text       
+     magnet_init                             308C32      10      16       2   .text       
 - VARIABLES:
      accelerometer_cfg                         2000       4       4       1   .data       
      gyro_cfg                                  2004       2       2       1   .data       
      mag_cfg                                   2006       2       2       1   .data       
 MODULE:                 -- iic.c.o --
 - PROCEDURES:
-     iicinit                                 308CAE      1C      28       2   .text       
-     iic_request_data                        308CCA      1B      27       4   .text       
-     iic_read_data                           308CE5      58      88       4   .text       
-     iic_send_data                           308D3D      2E      46       6   .text       
-     iicresponse                             308D6B      2E      46       6   .text       
-     iicstart                                308D99      42      66       4   .text       
-     iicstop                                 308DDB       4       4       8   .text       
-     iicrestart                              308DDF       E      14       2   .text       
-     iictransmit                             308DED       B      11       4   .text       
-     iicswrcv                                308DF8       8       8       2   .text       
-     iicreceive                              308E00      27      39       2   .text       
-     iicreceivem1                            308E27      2A      42       2   .text       
-     iicreceivelast                          308E51      30      48       2   .text       
-     setAlarm                                308E81      17      23      12   .text       
-     Init_TC7                                308E98      11      17       2   .text       
+     iicinit                                 308C42      1C      28       2   .text       
+     iic_send_data                           308C5E      2E      46       6   .text       
+     iicresponse                             308C8C      2E      46       4   .text       
+     iicstart                                308CBA      42      66       2   .text       
+     iicstop                                 308CFC       4       4       6   .text       
+     iictransmit                             308D00       B      11       2   .text       
+     setAlarm                                308D0B      17      23       6   .text       
+     Init_TC7                                308D22      11      17       2   .text       
      TC7_ISR                                   C6F0      27      39       1   NON_BANKED  
 - VARIABLES:
-     alarmSignaled                             2015       1       1      14   .bss        
+     alarmSignaled                             2015       1       1       8   .bss        
      currentTime                               2016       2       2       5   .bss        
      alarmTime                                 2018       2       2       2   .bss        
      alarmSet                                  201A       1       1       3   .bss        
 MODULE:                 -- accelerometer.c.o --
 - PROCEDURES:
-     convertAccelUnits                       308EA9      5E      94       2   .text       
+     convertAccelUnits                       308D33      5E      94       2   .text       
 - VARIABLES:
 MODULE:                 -- servo.c.o --
 - PROCEDURES:
-     PWMinitialise                           308F07      27      39       2   .text       
-     setServoPose                            308F2E       D      13       4   .text       
-     Init_TC6                                308F3B      14      20       2   .text       
+     PWMinitialise                           308D91      27      39       2   .text       
+     setServoPose                            308DB8       D      13       4   .text       
+     Init_TC6                                308DC5      14      20       2   .text       
      TC6_ISR                                   C717      EC     236       6   NON_BANKED  
 - VARIABLES:
      theta_azimuth                             2008       2       2       2   .data       
@@ -943,8 +934,8 @@ MODULE:                 -- servo.c.o --
      toggle_elev                               2025       2       2       3   .bss        
 MODULE:                 -- laser.c.o --
 - PROCEDURES:
-     laserInit                               308F4F      13      19       2   .text       
-     GetLatestLaserSample                    308F62       B      11       2   .text       
+     laserInit                               308DD9      13      19       2   .text       
+     GetLatestLaserSample                    308DEC       B      11       2   .text       
      TC1_ISR                                   C803      60      96       1   NON_BANKED  
 - VARIABLES:
      riseEdge                                  2027       4       4       8   .bss        
@@ -952,9 +943,9 @@ MODULE:                 -- laser.c.o --
      rawLaserSample                            202F       4       4       4   .bss        
 MODULE:                 -- serial.c.o --
 - PROCEDURES:
-     initSerial_SCI1                         308F6D       E      14       2   .text       
-     sendData                                308F7B       9       9       2   .text       
-     outputSerial_SCI1                       308F84      1A      26       8   .text       
+     initSerial_SCI1                         308DF7       E      14       2   .text       
+     sendData                                308E05       9       9       2   .text       
+     outputSerial_SCI1                       308E0E      1A      26       8   .text       
 - VARIABLES:
 
 *********************************************************************************************
@@ -962,7 +953,7 @@ MODULE STATISTIC
   Name                                      Data   Code  Const
 ---------------------------------------------------------------------------------------------
   mc9s12dg256.c.o                            400      0      0
-  main.c.o                                     0    415    231
+  main.c.o                                     0    373    231
   Start12.c.o                                  0     65      0
   PRINTF.C.o (ansib.lib)                       7   2601    212
   STRING.C.o (ansib.lib)                       0     13      0
@@ -976,8 +967,8 @@ MODULE STATISTIC
   VREGS.C.o (ansib.lib)                        0     28      0
   pll.c.o                                      0     21      0
   isr_vectors.c.o                              0     16    126
-  l3g4200d.c.o                                 8    155      0
-  iic.c.o                                      6    546      0
+  l3g4200d.c.o                                 8     89      0
+  iic.c.o                                      6    280      0
   accelerometer.c.o                            0     94      0
   servo.c.o                                   18    308      0
   laser.c.o                                   12    126      0
@@ -989,12 +980,10 @@ SECTION USE IN OBJECT-ALLOCATION SECTION
 ---------------------------------------------------------------------------------------------
 SECTION: ".text"
   printErrorCode main Init Ten vprintf _out deposit_char sprintf strcpy 
-  PLL_Init getRawDataAccel getRawDataGyro iicSensorInit accel_init gyro_init 
-  magnet_init iicinit iic_request_data iic_read_data iic_send_data iicresponse 
-  iicstart iicstop iicrestart iictransmit iicswrcv iicreceive iicreceivem1 
-  iicreceivelast setAlarm Init_TC7 convertAccelUnits PWMinitialise setServoPose 
-  Init_TC6 laserInit GetLatestLaserSample initSerial_SCI1 sendData 
-  outputSerial_SCI1 
+  PLL_Init iicSensorInit accel_init gyro_init magnet_init iicinit iic_send_data 
+  iicresponse iicstart iicstop iictransmit setAlarm Init_TC7 convertAccelUnits 
+  PWMinitialise setServoPose Init_TC6 laserInit GetLatestLaserSample 
+  initSerial_SCI1 sendData outputSerial_SCI1 
 SECTION: ".data"
   accelerometer_cfg gyro_cfg mag_cfg theta_azimuth theta_elevation theta_step 
 SECTION: ".bss"
@@ -1846,9 +1835,9 @@ OBJECT LIST SORTED BY ADDRESS
      _SPI0DR                                     DD       1       1       0   .abs_section_dd
      _IBAD                                       E0       1       1       1   .abs_section_e0
      _IBFD                                       E1       1       1       1   .abs_section_e1
-     _IBCR                                       E2       1       1       9   .abs_section_e2
-     _IBSR                                       E3       1       1      11   .abs_section_e3
-     _IBDR                                       E4       1       1       7   .abs_section_e4
+     _IBCR                                       E2       1       1       3   .abs_section_e2
+     _IBSR                                       E3       1       1       5   .abs_section_e3
+     _IBDR                                       E4       1       1       2   .abs_section_e4
      _SPI1CR1                                    F0       1       1       0   .abs_section_f0
      _SPI1CR2                                    F1       1       1       0   .abs_section_f1
      _SPI1BR                                     F2       1       1       0   .abs_section_f2
@@ -2055,7 +2044,7 @@ OBJECT LIST SORTED BY ADDRESS
      theta_elevation                           200A       2       2       2   .data       
      theta_step                                200C       2       2       5   .data       
      pbuf                                      200E       7       7      16   .bss        
-     alarmSignaled                             2015       1       1      14   .bss        
+     alarmSignaled                             2015       1       1       8   .bss        
      currentTime                               2016       2       2       5   .bss        
      alarmTime                                 2018       2       2       2   .bss        
      alarmSet                                  201A       1       1       3   .bss        
@@ -2139,46 +2128,37 @@ OBJECT LIST SORTED BY ADDRESS
      TC6_ISR                                   C717      EC     236       6   NON_BANKED  
      TC1_ISR                                   C803      60      96       1   NON_BANKED  
      _vect                                     FF80      7E     126       0   .abs_section_ff80
-     printErrorCode                          308000      D7     215       4   .text       
-     main                                    3080D7      C8     200       2   .text       
-     Init                                    30819F      29      41       2   .text       
-     Ten                                     3081C8      AC     172       5   .text       
-     vprintf                                 308274     933    2355     128   .text       
-     _out                                    308BA7       C      12       2   .text       
-     deposit_char                            308BB3       F      15       3   .text       
-     sprintf                                 308BC2      2F      47       2   .text       
-     strcpy                                  308BF1       D      13      18   .text       
-     PLL_Init                                308BFE      15      21       2   .text       
-     getRawDataAccel                         308C13      21      33       2   .text       
-     getRawDataGyro                          308C34      21      33       2   .text       
-     iicSensorInit                           308C55      29      41       2   .text       
-     accel_init                              308C7E      10      16       2   .text       
-     gyro_init                               308C8E      10      16       2   .text       
-     magnet_init                             308C9E      10      16       2   .text       
-     iicinit                                 308CAE      1C      28       2   .text       
-     iic_request_data                        308CCA      1B      27       4   .text       
-     iic_read_data                           308CE5      58      88       4   .text       
-     iic_send_data                           308D3D      2E      46       6   .text       
-     iicresponse                             308D6B      2E      46       6   .text       
-     iicstart                                308D99      42      66       4   .text       
-     iicstop                                 308DDB       4       4       8   .text       
-     iicrestart                              308DDF       E      14       2   .text       
-     iictransmit                             308DED       B      11       4   .text       
-     iicswrcv                                308DF8       8       8       2   .text       
-     iicreceive                              308E00      27      39       2   .text       
-     iicreceivem1                            308E27      2A      42       2   .text       
-     iicreceivelast                          308E51      30      48       2   .text       
-     setAlarm                                308E81      17      23      12   .text       
-     Init_TC7                                308E98      11      17       2   .text       
-     convertAccelUnits                       308EA9      5E      94       2   .text       
-     PWMinitialise                           308F07      27      39       2   .text       
-     setServoPose                            308F2E       D      13       4   .text       
-     Init_TC6                                308F3B      14      20       2   .text       
-     laserInit                               308F4F      13      19       2   .text       
-     GetLatestLaserSample                    308F62       B      11       2   .text       
-     initSerial_SCI1                         308F6D       E      14       2   .text       
-     sendData                                308F7B       9       9       2   .text       
-     outputSerial_SCI1                       308F84      1A      26       8   .text       
+     printErrorCode                          308000      D7     215       2   .text       
+     main                                    3080D7      9E     158       2   .text       
+     Init                                    308175      29      41       2   .text       
+     Ten                                     30819E      AC     172       5   .text       
+     vprintf                                 30824A     933    2355     128   .text       
+     _out                                    308B7D       C      12       2   .text       
+     deposit_char                            308B89       F      15       3   .text       
+     sprintf                                 308B98      2F      47       2   .text       
+     strcpy                                  308BC7       D      13      18   .text       
+     PLL_Init                                308BD4      15      21       2   .text       
+     iicSensorInit                           308BE9      29      41       2   .text       
+     accel_init                              308C12      10      16       2   .text       
+     gyro_init                               308C22      10      16       2   .text       
+     magnet_init                             308C32      10      16       2   .text       
+     iicinit                                 308C42      1C      28       2   .text       
+     iic_send_data                           308C5E      2E      46       6   .text       
+     iicresponse                             308C8C      2E      46       4   .text       
+     iicstart                                308CBA      42      66       2   .text       
+     iicstop                                 308CFC       4       4       6   .text       
+     iictransmit                             308D00       B      11       2   .text       
+     setAlarm                                308D0B      17      23       6   .text       
+     Init_TC7                                308D22      11      17       2   .text       
+     convertAccelUnits                       308D33      5E      94       2   .text       
+     PWMinitialise                           308D91      27      39       2   .text       
+     setServoPose                            308DB8       D      13       4   .text       
+     Init_TC6                                308DC5      14      20       2   .text       
+     laserInit                               308DD9      13      19       2   .text       
+     GetLatestLaserSample                    308DEC       B      11       2   .text       
+     initSerial_SCI1                         308DF7       E      14       2   .text       
+     sendData                                308E05       9       9       2   .text       
+     outputSerial_SCI1                       308E0E      1A      26       8   .text       
 
 *********************************************************************************************
 UNUSED-OBJECTS SECTION
@@ -2202,9 +2182,10 @@ rtshc12.c.o (ansib.lib):
   _LMODS _COPY _CASE_DIRECT _CASE_CHECKED _CASE_SEARCH _CASE_SEARCH_BYTE _FCALL 
   _FPCMP 
 l3g4200d.c.o:
-  getRawDataMagnet 
+  getRawDataMagnet getRawDataAccel getRawDataGyro 
 iic.c.o:
-  iicreceiveone 
+  iic_request_data iic_read_data iicrestart iicswrcv iicreceive iicreceivem1 
+  iicreceivelast iicreceiveone 
 NOT USED VARIABLES
 STRING.C.o (ansib.lib):
   STRING..1 next.2 
@@ -2294,10 +2275,9 @@ printErrorCode            USES _CASE_CHECKED_BYTE STRING.text.1 strcpy
                                 STRING.IIC..Data.size.incor.14 STRING.text.15 STRING.IIC..Unknown.error...16 
                                 sprintf outputSerial_SCI1 
 main                      USES STRING.point.17 strcpy PLL_Init PWMinitialise 
-                                setServoPose initSerial_SCI1 laserInit Init_TC6 
-                                getRawDataGyro getRawDataAccel printErrorCode 
-                                GetLatestLaserSample convertAccelUnits _FSTRUNC outputSerial_SCI1 
-                                iicSensorInit 
+                                setServoPose initSerial_SCI1 iicSensorInit printErrorCode 
+                                laserInit Init_TC6 GetLatestLaserSample 
+                                convertAccelUnits _FSTRUNC outputSerial_SCI1 
 Init                      USES _startupData 
 Ten                       USES fpow10 fpow_10 Ten _FMUL 
 vprintf                   USES vprintf _CASE_SEARCH_8_BYTE _CASE_DIRECT_BYTE 
@@ -2308,27 +2288,17 @@ _out                      USES pbuf
 deposit_char              USES pbuf 
 sprintf                   USES pbuf deposit_char vprintf 
 PLL_Init                  USES _SYNR _REFDV _CLKSEL _PLLCTL _CRGFLG 
-getRawDataAccel           USES iic_request_data iic_read_data 
-getRawDataGyro            USES iic_request_data iic_read_data 
 iicSensorInit             USES iicinit gyro_init accel_init magnet_init 
 accel_init                USES accelerometer_cfg iic_send_data 
 gyro_init                 USES gyro_cfg iic_send_data 
 magnet_init               USES mag_cfg iic_send_data 
 iicinit                   USES Init_TC7 _IBFD _IBAD _IBCR 
-iic_request_data          USES iicstart iicstop iictransmit 
-iic_read_data             USES iicrestart iicswrcv iicreceive iicreceivem1 
-                                iicreceivelast 
 iic_send_data             USES iicstart iictransmit iicstop 
 iicresponse               USES setAlarm _IBSR alarmSignaled iicstop 
 iicstart                  USES setAlarm _IBSR alarmSignaled _IBCR _IBDR 
                                 iicresponse 
 iicstop                   USES _IBCR 
-iicrestart                USES _IBCR _IBDR iicresponse 
 iictransmit               USES _IBDR iicresponse 
-iicswrcv                  USES _IBCR _IBDR 
-iicreceive                USES setAlarm _IBSR alarmSignaled _IBDR 
-iicreceivem1              USES setAlarm _IBSR alarmSignaled _IBCR _IBDR 
-iicreceivelast            USES setAlarm _IBSR alarmSignaled _IBCR _IBDR 
 setAlarm                  USES currentTime alarmTime alarmSet alarmSignaled 
 Init_TC7                  USES _TSCR1 _TSCR2 _TIOS _TCTL1 _TIE 
 convertAccelUnits         USES _FDIV _ILSEXT _FSFLOAT 
@@ -2358,56 +2328,40 @@ DEPENDENCY TREE
  |  |    
  |  +- initSerial_SCI1     
  |  |    
- |  +- laserInit           
- |  |    
- |  +- Init_TC6            
- |  |    
- |  +- getRawDataGyro      
+ |  +- iicSensorInit       
  |  |  | 
- |  |  +- iic_request_data    
+ |  |  +- iicinit             
  |  |  |  | 
- |  |  |  +- iicstart            
- |  |  |  |  | 
- |  |  |  |  +- setAlarm            
- |  |  |  |  |    
- |  |  |  |  +- iicresponse         
- |  |  |  |     | 
- |  |  |  |     +- setAlarm             (see above)
- |  |  |  |     |  
- |  |  |  |     +- iicstop             
- |  |  |  |          
- |  |  |  +- iicstop              (see above)
- |  |  |  |  
- |  |  |  +- iictransmit         
+ |  |  |  +- Init_TC7            
+ |  |  |       
+ |  |  +- gyro_init           
+ |  |  |  | 
+ |  |  |  +- iic_send_data       
  |  |  |     | 
- |  |  |     +- iicresponse          (see above)
+ |  |  |     +- iicstart            
+ |  |  |     |  | 
+ |  |  |     |  +- setAlarm            
+ |  |  |     |  |    
+ |  |  |     |  +- iicresponse         
+ |  |  |     |     | 
+ |  |  |     |     +- setAlarm             (see above)
+ |  |  |     |     |  
+ |  |  |     |     +- iicstop             
+ |  |  |     |          
+ |  |  |     +- iictransmit         
+ |  |  |     |  | 
+ |  |  |     |  +- iicresponse          (see above)
+ |  |  |     |     
+ |  |  |     +- iicstop              (see above)
  |  |  |        
- |  |  +- iic_read_data       
+ |  |  +- accel_init          
+ |  |  |  | 
+ |  |  |  +- iic_send_data        (see above)
+ |  |  |     
+ |  |  +- magnet_init         
  |  |     | 
- |  |     +- iicrestart          
- |  |     |  | 
- |  |     |  +- iicresponse          (see above)
- |  |     |     
- |  |     +- iicswrcv            
- |  |     |    
- |  |     +- iicreceive          
- |  |     |  | 
- |  |     |  +- setAlarm             (see above)
- |  |     |     
- |  |     +- iicreceivem1        
- |  |     |  | 
- |  |     |  +- setAlarm             (see above)
- |  |     |     
- |  |     +- iicreceivelast      
- |  |        | 
- |  |        +- setAlarm             (see above)
- |  |           
- |  +- getRawDataAccel     
- |  |  | 
- |  |  +- iic_request_data     (see above)
- |  |  |  
- |  |  +- iic_read_data        (see above)
- |  |     
+ |  |     +- iic_send_data        (see above)
+ |  |        
  |  +- printErrorCode      
  |  |  | 
  |  |  +- _CASE_CHECKED_BYTE  
@@ -2526,6 +2480,10 @@ DEPENDENCY TREE
  |  |     | 
  |  |     +- sendData            
  |  |          
+ |  +- laserInit           
+ |  |    
+ |  +- Init_TC6            
+ |  |    
  |  +- GetLatestLaserSample
  |  |    
  |  +- convertAccelUnits   
@@ -2559,31 +2517,7 @@ DEPENDENCY TREE
  |  +- _FSTRUNC             (see above)
  |  |  
  |  +- outputSerial_SCI1    (see above)
- |  |  
- |  +- iicSensorInit       
- |     | 
- |     +- iicinit             
- |     |  | 
- |     |  +- Init_TC7            
- |     |       
- |     +- gyro_init           
- |     |  | 
- |     |  +- iic_send_data       
- |     |     | 
- |     |     +- iicstart             (see above)
- |     |     |  
- |     |     +- iictransmit          (see above)
- |     |     |  
- |     |     +- iicstop              (see above)
- |     |        
- |     +- accel_init          
- |     |  | 
- |     |  +- iic_send_data        (see above)
- |     |     
- |     +- magnet_init         
- |        | 
- |        +- iic_send_data        (see above)
- |           
+ |     
  +- _Startup            
     | 
     +- Init                
@@ -2619,5 +2553,5 @@ STATISTIC SECTION
 ExeFile:
 --------
 Number of blocks to be downloaded: 7
-Total size of all blocks to be downloaded: 6293
+Total size of all blocks to be downloaded: 5919
 

@@ -20,6 +20,8 @@ void laserInit(void){
   TFLG1 |= TFLG1_C1F_MASK; // Reset flag
 }
 
+
+//Returns scaled value from sensor
 unsigned long GetLatestLaserSample(void) {
   return lastLaserSample * 0.041667;
 }

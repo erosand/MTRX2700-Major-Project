@@ -113,42 +113,9 @@ void main(void) {
   _DISABLE_COP();
     
   for(;;) {
-  
-    #ifndef SIMULATION_TESTING
-  
-    // read the raw values
-    error_code = getRawDataGyro(&read_gyro);   
-    if (error_code != NO_ERROR) {
-      printErrorCode(error_code);   
-       
-      error_code = iicSensorInit();
-      printErrorCode(error_code);   
-    }
-    
-    error_code = getRawDataAccel(&read_accel);
-    if (error_code != NO_ERROR) {
-      printErrorCode(error_code);   
-    
-      error_code = iicSensorInit();
-      printErrorCode(error_code); 
-    }
-    
-    //error_code = getRawDataMagnet(&read_magnet);
-    
+    //reading in scaled value of the LIDAR Sensor
     singleSample = GetLatestLaserSample();
-        
-    #else
-    
-    // inject some values for simulation
-    read_gyro.x = 123; read_gyro.y = 313; read_gyro.z = 1002;
-    read_accel.x = 124; read_accel.y = 312; read_accel.z = 2002;
-    read_magnet.x = 125; read_magnet.y = 311; read_magnet.z = 3002;
-    
-    #endif
-
-    // convert the acceleration to a scaled value
-    convertUnits(&read_accel, &scaled_accel); //converts to units of gs   
-    
+            
     // format the string of the sensor data to go the the serial    
     sprintf(buffer, "Point,%d,%d,%lu\r\n", current_azimuth, current_elevation, singleSample);
     
@@ -156,6 +123,5 @@ void main(void) {
     SerialOutputString(buffer, &SCI1);
     
     
-    //_FEED_COP(); /* feeds the dog */
   } /* loop forever */
 }
