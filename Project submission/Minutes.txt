@@ -3,36 +3,61 @@ Group 1 members: Erik Anderberg, Ivo Urbanczyk, Lincoln Tut, Jackson Bamber, Jon
 
 Minutes: 
 -----------------------------
-Session 1 (29/3-22, Tron Lab)
+Session 1 (26/4-22, Tron Lab)
 Present: All
-
+Agenda:
 Spent the lab discussing and brainstorming prototype ideas.
 
 -----------------------------
 Session 2 (1/5-22, Discord)
 Present: All
-
+Agenda: To delegate tasks in the project and begin understanding PTU module 
 Decided on project idea and assigned partial tasks;
   User interface - Erik
   LIDAR sensor info to distance - Ivo
-  Controlling/Checking LIDAR orientation using IMU - Lincoln
+  Controlling/Checking LIDAR orientation - Lincoln
   Logic for LIDAR movement - Jonathan and Jackson
 
 -----------------------------
-Session 3 (, Tron Lab)
-Present: ????
-
-  ???????
-  
+Session 3 (3/5, Tron Lab)
+Present: All
+Agenda: To brainstorm
+We had not received a PTU yet so progress was limited, idea was developed and further delegation of parts occurred. 
 -----------------------------
 Session 4 (15/5-22, Discord)
 Present: Erik, Jonathan, Jackson
-
+Agenda: To complete progress report and discuss plans for integration
 Completed a progress check and what else needs to be done
 Completed the progress report for week 12 submission
 
+-----------------------------
 
-Session 5 (19/5-22, Engineering building)
+Session 5 (18/5-22, Engineering building)
+Present: Lincoln, Ivo
+Agenda: Attempt to fix some bugs causing code to not compile
+Incorporating Jackson’s serial code into the main project and debugging. Realised that our Dragon Board code doesn’t compile. We have no idea why. (Some kind of syntax error?)
+
+-----------------------------
+
+Session 6 (19/5-22, Engineering building)
 Present: Erik, Ivo
+Agenda: To test that serial communication between codewarrior and python modules can occur
+Finally fixed syntax error in Dragon Board code. Testing and further debugging transmission of data from board to python. Erik’s code is working as intended, all we need to do is fix all the undefined behaviour of the Dragon Board.
 
-Testing and debugging transmission of data from board to python.
+-----------------------------
+Session 7 (22/5-22, Engineering building)
+Present: All
+Agenda: To further each module separately and debug
+Worked on plotting point cloud and box depth finding algorithm with randomised test data, further debugging and incorporation of modules.
+
+-----------------------------
+Session 8 (23/5-22, Engineering building)
+Present: All
+Agenda: Get Dragon Board to successfully send point data
+We changed from trying to send serial data in struct format to serialising data in ASCII format. Finally successfully communicated real point data from lidar to matlab point cloud plotting code. The video was created and documentation was completed
+
+-----------------------------
+Session 9 (24/5/22, Engineering Building)
+Present: All
+Agenda: To assure that project is demonstration ready, with all code/documentation is submitted on git and video uploaded to canvas
+We trialled presenting the project, and did final changes such as cleaning the git repository
